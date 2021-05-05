@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 public class ControllerIndicator : MonoBehaviour
 {
     [SerializeField] public InputActionReference positionAction = null;
+    [SerializeField] public InputActionReference rotationAction = null;
     [SerializeField] public GameObject hand = null;
     [SerializeField] public float showDistance = 0.25f;
 
     private Material material = null;
     private Color color = Color.white;
     private Vector3 targetPosition = Vector3.zero;
+    private Quaternion targetRotation = Quaternion.identity;
     private float currentDistance = 0.0f;
 
     private void Awake()
@@ -22,27 +24,29 @@ public class ControllerIndicator : MonoBehaviour
 
     private void Update()
     {
-        SetTargetPosition();
+        SetTargetPositionAndRotation();
         CalculateDistance();
         FadeColor();
-        MoveToControllerPosition();
+        SetIndicatorPositionAndRotation();
 
     }
 
-    private void MoveToControllerPosition()
+    private void SetIndicatorPositionAndRotation()
     {
         // move hand indicator to match real controller position
-        transform.position = targetPosition;
+        transform.localPosition = targetPosition;
+        transform.localRotation = targetRotation;
     }
 
-    private void SetTargetPosition()
+    private void SetTargetPositionAndRotation()
     {
         targetPosition = positionAction.action.ReadValue<Vector3>();
+        targetRotation = rotationAction.action.ReadValue<Quaternion>();
     }
 
     private void CalculateDistance()
     {
-        currentDistance = Vector3.Distance(hand.transform.position, targetPosition);
+        currentDistance = Vector3.Distance(hand.transform.localPosition, targetPosition);
     }
 
     private void FadeColor()

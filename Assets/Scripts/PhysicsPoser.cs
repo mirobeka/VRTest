@@ -21,6 +21,7 @@ public class PhysicsPoser : MonoBehaviour
     public InputActionReference rotationAction = null;
 
     // References
+    public Transform xrRigTransform = null;
     private Rigidbody rigidBody = null;
     private XRBaseInteractor interactor = null;
 
@@ -74,6 +75,8 @@ public class PhysicsPoser : MonoBehaviour
             MoveUsingPhysics();
             RotateUsingPhysics();
         }
+
+        // update position via transform after teleport
     }
 
     public bool IsHoldingObject()
@@ -106,7 +109,16 @@ public class PhysicsPoser : MonoBehaviour
 
     private Vector3 FindNewVelocity()
     {
-        Vector3 difference = targetPosition - rigidBody.position;
+        // target position, je  pozicia lokalna
+        // rigid body je pozicia globalna
+        // potrebovali by sme teda najprv prepocitat
+
+
+        // position of rigid body operates only in world space. That's a problem when controllers
+        // are in local space of xr Rig. First we need to transform position to local space of
+        // xr rig 
+        Vector3 localRigidBodyPosition = xrRigTransform.InverseTransformPoint(rigidBody.position);
+        Vector3 difference = targetPosition - localRigidBodyPosition;
         return difference / Time.deltaTime;
     }
 
