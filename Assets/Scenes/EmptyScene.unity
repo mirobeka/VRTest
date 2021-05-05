@@ -6554,7 +6554,7 @@ MonoBehaviour:
   maxRotationChange: 75
   positionAction: {fileID: -3326005586356538449, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   rotationAction: {fileID: 5101698808175986029, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  xrRigTransform: {fileID: 0}
+  xrRigTransform: {fileID: 1361782736}
 --- !u!54 &1171924078
 Rigidbody:
   m_ObjectHideFlags: 0
