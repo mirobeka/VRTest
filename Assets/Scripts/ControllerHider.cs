@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(PhysicsPoser))]
@@ -19,22 +20,22 @@ public class ControllerHider : MonoBehaviour
 
     private void OnEnable()
     {
-        interactor.onSelectEntered.AddListener(Hide);
-        interactor.onSelectExited.AddListener(Show);
+        interactor.selectEntered.AddListener(Hide);
+        interactor.selectExited.AddListener(Show);
     }
 
     private void OnDisable()
     {
-        interactor.onSelectEntered.RemoveListener(Hide);
-        interactor.onSelectExited.RemoveListener(Show);
+        interactor.selectEntered.RemoveListener(Hide);
+        interactor.selectExited.RemoveListener(Show);
     }
 
-    private void Hide(XRBaseInteractable interactable)
+    private void Hide(SelectEnterEventArgs actionEvent)
     {
         controllerObject.SetActive(false);
     }
 
-    private void Show(XRBaseInteractable interactable)
+    private void Show(SelectExitEventArgs actionEvent)
     {
         StartCoroutine(WaitForRange());
     }
