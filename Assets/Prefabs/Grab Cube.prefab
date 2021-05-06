@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1332160676748601779}
   - component: {fileID: 1332160676748601776}
   - component: {fileID: 7161206942522114433}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grab Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
