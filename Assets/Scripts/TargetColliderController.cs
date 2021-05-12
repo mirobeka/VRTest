@@ -18,7 +18,12 @@ public class TargetColliderController : MonoBehaviour
         if (col.gameObject.tag == "Ball")
         {
             Explode();
+        }else if (col.gameObject.tag == "BigTarget")
+        {
+            Explode();
+            // pocitaj body
 
         }
+
     }
 }
