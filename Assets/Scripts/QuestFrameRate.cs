@@ -5,14 +5,14 @@ using System.Linq;
 
 public class QuestFrameRate : MonoBehaviour
 {
+    public float refreshRate = 90f;
     // Start is called before the first frame update
     void Awake()
     {
-        float newRate = 90f;
-        if (Unity.XR.Oculus.Performance.TrySetDisplayRefreshRate(newRate))
+        if (Unity.XR.Oculus.Performance.TrySetDisplayRefreshRate(refreshRate))
         {
-            Time.fixedDeltaTime = 1f / newRate;
-            Time.maximumDeltaTime = 1f / newRate;
+            Time.fixedDeltaTime = 1f / refreshRate;
+            Time.maximumDeltaTime = 1f / refreshRate;
         }
     }
 }
