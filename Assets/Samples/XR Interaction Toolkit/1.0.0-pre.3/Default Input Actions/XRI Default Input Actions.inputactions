@@ -530,6 +530,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "PrimaryButton",
+                    "type": "Button",
+                    "id": "804fb64a-585b-4ffe-a617-55cca7ffe70e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -785,6 +793,17 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bdae6b53-6dd4-4c2b-a0fe-63b17dcf97d0",
+                    "path": "<XRController>{RightHand}/primary",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
