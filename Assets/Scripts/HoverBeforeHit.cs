@@ -10,6 +10,7 @@ public class HoverBeforeHit : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
     }
 
     void OnCollisionEnter(Collision col)
