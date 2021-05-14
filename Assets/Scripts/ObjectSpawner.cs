@@ -6,6 +6,7 @@ public class ObjectSpawner : MonoBehaviour
 {
     public GameObject spawnee = null;
     private Transform attachTransform = null;
+    private GameObject lastSpawned = null;
     
     void Awake(){
         attachTransform = transform.Find("AttachTransform");
@@ -17,7 +18,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public void SpawnNewOne()
     {
-        Instantiate(spawnee, attachTransform.position, Quaternion.identity);
+        lastSpawned = Instantiate(spawnee, attachTransform.position, Quaternion.identity);
     }
 
     void OnTriggerExit(Collider other)
@@ -27,5 +28,12 @@ public class ObjectSpawner : MonoBehaviour
             SpawnNewOne();
         }
 
+    }
+
+    public void SetNewSpawnee(GameObject newObject)
+    {
+        Destroy(lastSpawned);
+        spawnee = newObject;
+        SpawnNewOne();
     }
 }
