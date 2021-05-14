@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HitBlinker : MonoBehaviour
 {
+    public int points = 0;
+    public PointsManager pointsManager = null;
     public Color blinkColor;
 
     private Renderer mesh = null;
@@ -29,7 +31,7 @@ public class HitBlinker : MonoBehaviour
     void OnCollisionEnter(Collision other){
         if (other.gameObject.tag == "Ball"){
             StartCoroutine(Flasher());
+            pointsManager.AddPoint(points);
         }
-
     }
 }
