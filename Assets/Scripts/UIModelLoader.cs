@@ -23,7 +23,9 @@ public class UIModelLoader : MonoBehaviour
     }
 
     void SetSpawnPrefab(GameObject prefab){
-        spawner.SetNewSpawnee(prefab);
+        if (spawner != null){
+            spawner.SetNewSpawnee(prefab);
+        }
     }
 
 }
