@@ -6,10 +6,15 @@ using System;
 
 public class BallHit : MonoBehaviour
 {
+    public float soundDelay = 2f;
     public AudioSource weakSwingSound = null;
     public AudioSource mediumSwingSound = null;
     public AudioSource hardSwingSound = null;
-    public float soundDelay = 2f;
+    public GameObject spankEffectPrefab = null;
+
+    private float minVelocity = 2f; 
+    private float midVelocity = 5f;
+    private float maxVelocity = 10f;
 
     private bool canPlaySounds = true;
     private GameObject swingLabel = null;
@@ -20,6 +25,7 @@ public class BallHit : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
     void Start()
     {
         swingLabel = GameObject.Find("SwingForce/Force");
@@ -41,15 +47,19 @@ public class BallHit : MonoBehaviour
 
     }
 
-    void PlayHitSound(float velocity){
+    void SpankEffect(float velocity){
+        if(velocity >= midVelocity){
+            Instantiate(spankEffectPrefab, transform.position, Quaternion.identity);
+        }
+    }
 
-        UpdateSwingForce(velocity);
-
-        if (velocity > 2 && velocity <= 5){
+    void PlayHitSound(float velocity)
+    {
+        if (velocity > minVelocity && velocity <= midVelocity){
             weakSwingSound.Play();
-        }else if( velocity > 5 && velocity <= 10){
+        }else if( velocity > midVelocity && velocity <= maxVelocity){
             mediumSwingSound.Play();
-        }else if( velocity > 10){
+        }else if( velocity > maxVelocity){
             hardSwingSound.Play();
         }
         canPlaySounds = false;
@@ -63,6 +73,8 @@ public class BallHit : MonoBehaviour
             if( !rb.isKinematic && canPlaySounds){
                 float velocity = col.relativeVelocity.magnitude;
                 PlayHitSound(velocity);
+                UpdateSwingForce(velocity);
+                SpankEffect(velocity);
             }
         }
     }

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3269696950834178385}
   - component: {fileID: 1030085305662572042}
   m_Layer: 10
-  m_Name: BaseModel
+  m_Name: _BaseModel
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,10 +269,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af06c000fdb09f4bb34ce6f805a0e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundDelay: 2
   weakSwingSound: {fileID: 1030085305662572042}
   mediumSwingSound: {fileID: 3269696950834178385}
   hardSwingSound: {fileID: 3836248390866821928}
-  soundDelay: 2
+  spankEffectPrefab: {fileID: 881928296907145748, guid: 68f10fda42d32b640a8ab3c612b318b0, type: 3}
 --- !u!82 &3836248390866821928
 AudioSource:
   m_ObjectHideFlags: 0
