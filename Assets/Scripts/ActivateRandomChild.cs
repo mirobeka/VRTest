@@ -7,7 +7,7 @@ public class ActivateRandomChild : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int randIdx = Random.Range(0, transform.childCount-1);
+        int randIdx = Random.Range(0, transform.childCount);
         transform.GetChild(randIdx).gameObject.SetActive(true);
     }
 }
