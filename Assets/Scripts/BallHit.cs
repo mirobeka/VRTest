@@ -31,6 +31,7 @@ public class BallHit : MonoBehaviour
         swingLabel = GameObject.Find("SwingForce/Force");
     }
 
+
     private IEnumerator WaitUntilNextSound()
     {
         yield return new WaitForSeconds(soundDelay);
@@ -68,6 +69,7 @@ public class BallHit : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
+        // nemalo by tu byt == "BatPart" ??
         if (col.gameObject.tag == "Bat")
         {
             if( !rb.isKinematic && canPlaySounds){
@@ -78,4 +80,5 @@ public class BallHit : MonoBehaviour
             }
         }
     }
+
 }
