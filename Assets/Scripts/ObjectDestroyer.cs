@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ObjectDestroyer : MonoBehaviour
 {
-    public ObjectSpawner objectSpawner = null;
+    private ObjectSpawner objectSpawner = null;
+
+    void Awake()
+    {
+        objectSpawner = transform.parent.gameObject.GetComponent<ObjectSpawner>();
+    }
 
     void OnTriggerEnter(Collider col)
     {
