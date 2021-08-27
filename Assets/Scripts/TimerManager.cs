@@ -6,15 +6,20 @@ public class TimerManager : MonoBehaviour
 {
     public float time = 60f;
     public float timeRemaining = 60f;
-    public bool isRunning = false;
-    public TextMesh timeLabel = null;
-    public PointsManager pointsManager = null;
+    public AudioClip startCountdown = null;
+    public AudioClip stopCountdown = null;
+    public AudioClip melody = null;
+    private bool isRunning = false;
+    private TextMesh timeLabel = null;
+    private PointsManager pointsManager = null;
+    private AudioSource audioSource = null;
 
     void Awake()
     {
         GameObject go = GameObject.Find("Timer/Number");
         timeLabel = go.GetComponent<TextMesh>();
         pointsManager = GameObject.Find("PointsManager").GetComponent<PointsManager>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     void Update()
@@ -31,6 +36,10 @@ public class TimerManager : MonoBehaviour
             timeRemaining -= Time.deltaTime;
         }
 
+        if ((timeRemaining <= 6) && (timeRemaining > 1)){
+            PlayStopCountdown();
+        }
+
         if (timeRemaining <= 0){
             timeRemaining = 0;
             isRunning = false;
@@ -41,6 +50,7 @@ public class TimerManager : MonoBehaviour
     // funkcia ktorá sa vykoná keď dobehne timer
     void ExecuteTimerTrigger(){
         pointsManager.StopCount();
+        PlayMelody();
     }
     
     void UpdateUITimer(){
@@ -48,11 +58,18 @@ public class TimerManager : MonoBehaviour
         timeLabel.text = time;
     }
 
-    public void StartTimer(){
+    public void StartGame(){
         // reset time
+        isRunning = false;
         timeRemaining = time;
+        pointsManager.ResetPoints();
+        PlayStartCountdown();
+        StartCoroutine(LateGameStart(3f));
+    }
 
-        pointsManager.ResetPoinst();
+    private IEnumerator LateGameStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         isRunning = true;
     }
 
@@ -60,6 +77,23 @@ public class TimerManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeRemaining / 60);
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void PlayStartCountdown(){
+        audioSource.clip = startCountdown;
+        audioSource.Play();
+    }
+
+    private void PlayStopCountdown(){
+        if (!audioSource.isPlaying){
+            audioSource.clip = stopCountdown;
+            audioSource.Play();
+        }
+    }
+
+    private void PlayMelody(){
+        audioSource.clip = melody;
+        audioSource.Play();
     }
 
 }

@@ -15,7 +15,7 @@ public class PointsManager : MonoBehaviour
         pointsLabel = go.GetComponent<TextMesh>();
     }
 
-    public void ResetPoinst()
+    public void ResetPoints()
     {
         countPoints = true;
         points = 0;
