@@ -15,10 +15,12 @@ public class TargetColliderController : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Ball")
-        {
-            Explode();
-        }else if (col.gameObject.tag == "BigTarget")
+        // daj naspat bug
+        // if (col.gameObject.tag == "Ball")
+        // {
+        //     Explode();
+        // }else
+        if (col.gameObject.tag == "BigTarget")
         {
             Explode();
             // pocitaj body

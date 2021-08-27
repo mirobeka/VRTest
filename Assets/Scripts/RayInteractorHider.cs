@@ -11,12 +11,14 @@ public class RayInteractorHider : MonoBehaviour
     private LineRenderer lineInteractorRenderer = null;
     private XRInteractorLineVisual lineInteractorVisual = null;
     private XRRayInteractor lineInteractor = null;
+    private GameObject lineInteractorReticle = null;
     private bool visible = true;
 
     void Awake(){
         lineInteractor = GetComponent<XRRayInteractor>();
         lineInteractorRenderer = GetComponent<LineRenderer>();
         lineInteractorVisual = GetComponent<XRInteractorLineVisual>();
+        lineInteractorReticle = lineInteractorVisual.transform.GetChild(0).gameObject;
     }
 
     // Start is called before the first frame update
@@ -24,6 +26,7 @@ public class RayInteractorHider : MonoBehaviour
     {
         ToggleRay();
         enableRayAction.action.performed += ToggleRayAction;
+        enableRayAction.action.canceled += ToggleRayAction;
 
     }
 
@@ -39,6 +42,7 @@ public class RayInteractorHider : MonoBehaviour
         lineInteractor.enabled = visible;
         lineInteractorRenderer.enabled = visible;
         lineInteractorVisual.enabled = visible;
+        lineInteractorReticle.SetActive(visible);
     }
 
 
