@@ -7,9 +7,12 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject spawnee = null;
     private Transform attachTransform = null;
     private GameObject lastSpawned = null;
+    private bool bugEnabled = false;
+    private GameObject objectDestroyer = null;
     
     void Awake(){
         attachTransform = transform.Find("AttachTransform");
+        objectDestroyer = transform.Find("ObjectDestroyer").gameObject;
     }
 
     void Start(){
@@ -21,11 +24,21 @@ public class ObjectSpawner : MonoBehaviour
         lastSpawned = Instantiate(spawnee, attachTransform.position, Quaternion.identity);
     }
 
+    public void ToggleBug(){
+        bugEnabled = !bugEnabled;
+        objectDestroyer.SetActive(!bugEnabled);
+    }
+
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Ball")
-        {
+        if (bugEnabled){
             SpawnNewOne();
+
+        }else{
+            if(other.gameObject.tag == "Ball")
+            {
+                SpawnNewOne();
+            }
         }
 
     }
