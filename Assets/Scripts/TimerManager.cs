@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimerManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class TimerManager : MonoBehaviour
     public AudioClip startCountdown = null;
     public AudioClip stopCountdown = null;
     public AudioClip melody = null;
+    public UnityEvent onFinished = null;
+
     private bool isRunning = false;
     private TextMesh timeLabel = null;
     private PointsManager pointsManager = null;
@@ -51,6 +54,7 @@ public class TimerManager : MonoBehaviour
     void ExecuteTimerTrigger(){
         pointsManager.StopCount();
         PlayMelody();
+        onFinished.Invoke();
     }
     
     void UpdateUITimer(){
