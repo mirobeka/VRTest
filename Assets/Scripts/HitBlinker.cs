@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HitBlinker : MonoBehaviour
 {
     public int points = 0;
     public PointsManager pointsManager = null;
     public Color blinkColor;
+    public UnityEvent onHit = null;
 
     private Renderer mesh = null;
     private Color normalColor;
@@ -21,6 +23,7 @@ public class HitBlinker : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
+            onHit.Invoke();
             mesh.material.SetColor("_Emission", blinkColor);
             yield return new WaitForSeconds(.1f);
             mesh.material.SetColor("_Emission", normalColor);
