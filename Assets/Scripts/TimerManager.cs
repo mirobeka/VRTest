@@ -71,6 +71,11 @@ public class TimerManager : MonoBehaviour
         StartCoroutine(LateGameStart(3f));
     }
 
+    public void ResetTimer(){
+        isRunning = false;
+        timeRemaining = time;
+    }
+
     private IEnumerator LateGameStart(float delay)
     {
         yield return new WaitForSeconds(delay);

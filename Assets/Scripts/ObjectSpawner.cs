@@ -49,4 +49,8 @@ public class ObjectSpawner : MonoBehaviour
         spawnee = newObject;
         SpawnNewOne();
     }
+
+    public void ClearSpawnee(){
+        Destroy(lastSpawned);
+    }
 }

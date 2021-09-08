@@ -10,7 +10,7 @@ public class TargetColliderController : MonoBehaviour
     void Explode()
     {
         Instantiate(targetExplosionEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     void OnCollisionEnter(Collision col)
